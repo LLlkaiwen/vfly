@@ -1,0 +1,29 @@
+<package>
+  <name>vfly</name>
+  <version>1.0.0</version>
+  <description>VFly is a tiltable-rotor aerial vehilce  gazebo simulator.  </description>
+  <author>lkw</author>
+  <maintainer email="lkw_nuaa@163.com" />
+  <license>BSD</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roslaunch</build_depend>
+  <run_depend>robot_state_publisher</run_depend>
+  <run_depend>rviz</run_depend>
+  <run_depend>joint_state_publisher</run_depend>
+  <run_depend>gazebo</run_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>mav_msgs</build_depend>
+  <build_depend>message_generation</build_depend>
+  
+  <run_depend>message_runtime</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>mav_msgs</run_depend>
+  
+  <export>
+    <architecture_independent />
+  </export>
+</package>

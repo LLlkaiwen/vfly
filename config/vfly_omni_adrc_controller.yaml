@@ -1,0 +1,32 @@
+#h=0.005 beta1 = 1/h=200  beta2 = 1/(1.6*h^1.5)=1768   beta3 = 1/(8.6*h^2.2) = 13420
+#h=0.005 beta1 = 1/h=200  beta2 = 1/(3*h^2)=13333        beta3 = 1/(32*h^3) = 250000
+#h=0.004 beta1 = 1/h=250  beta2 = 1/(1.6*h^1.5)=2470
+attitude_gain:  {x: 1.5, y: 1.5, z: 1.5}
+
+adrc_cascade:     {
+
+adrc_x:           {td_r: 3, h: 0.004, b0: 1, limit: 18, eso_beta1: 200, eso_beta2: 1768,
+                   outer_nlsef_k: 1, outer_nlsef_alpha: 0.5, outer_nlsef_delta: 0.5, 
+                   inner_nlsef_k: 3, inner_nlsef_alpha: 1.0, inner_nlsef_delta: 0.5},
+
+adrc_y:           {td_r: 3, h: 0.004, b0: 1, limit: 18, eso_beta1: 200, eso_beta2: 1768,
+                   outer_nlsef_k: 1, outer_nlsef_alpha: 0.5, outer_nlsef_delta: 0.5, 
+                   inner_nlsef_k: 3, inner_nlsef_alpha: 1.0, inner_nlsef_delta: 0.5},
+
+adrc_z:           {td_r: 3, h: 0.004, b0: 1, limit: 18, eso_beta1: 200, eso_beta2: 1768,
+                   outer_nlsef_k: 1, outer_nlsef_alpha: 0.5, outer_nlsef_delta: 0.5, 
+                   inner_nlsef_k: 3, inner_nlsef_alpha: 1.0, inner_nlsef_delta: 0.5},
+
+}
+
+adrc_firstorder:  {
+
+adrc_roll:        {td_r: 0.2, h: 0.004, b0: 5, limit: 3,
+                   leso_beta1: 250, leso_beta2: 2470, lsef_k1: 8, lsef_k2: 0},
+
+adrc_pitch:       {td_r: 0.2, h: 0.004, b0: 5, limit: 3,
+                   leso_beta1: 250, leso_beta2: 2470, lsef_k1: 8, lsef_k2: 0},
+
+adrc_yaw:         {td_r: 0.2, h: 0.004, b0: 2, limit: 3,
+                   leso_beta1: 250, leso_beta2: 2470, lsef_k1: 8, lsef_k2: 0}
+}

@@ -1,0 +1,18 @@
+position_gain:  {x: 1, y: 1, z: 1}
+attitude_gain:  {x: 2, y: 2, z: 2}
+
+pid_u:          {kp: 1, ki: 0.015, kd: 0.01, integral_limit: 2, output_limit: 1}
+pid_v:          {kp: 1, ki: 0.015, kd: 0.01, integral_limit: 2, output_limit: 1}
+pid_w:          {kp: 1, ki: 0.015, kd: 0.01, integral_limit: 2, output_limit: 1}
+pid_p:          {kp: 1.2, ki: 0.2, kd: 0.01, integral_limit: 4 , output_limit: 1}
+pid_q:          {kp: 1.2, ki: 0.2, kd: 0.01, integral_limit: 4, output_limit: 1}
+pid_r:          {kp: 1, ki: 0.0, kd: 0.01, integral_limit: 2, output_limit: 1}
+
+
+
+# pid_x:          {x_gain: 1, x_integrator_gain: 0.01, u_gain: 0.55}
+# pid_y:          {y_gain: 1, y_integrator_gain: 0.01, v_gain: 0.55}
+# pid_z:          {z_gain: 1, z_integrator_gain: 0.01, w_gain: 0.55}
+# pid_roll:       {roll_gain: 1.8, roll_integrator_gain: 0.025, p_gain: 0.88}
+# pid_pitch:      {pitch_gain: 1.8, pitch_integrator_gain: 0.025, q_gain: 0.88}
+# pid_yaw:        {yaw_gain: 1.8, yaw_integrator_gain: 0.025, r_gain: 0.88}

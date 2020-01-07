@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<!--
+  description : 
+  time: 2020/01/07
+  author：lkw_nuaa@163.com
+-->
+
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <!--          机体          -->
+  <xacro:macro name="tiltable_rotors_base_macro"
+    params="robot_namespace mass  mesh_file  *origin *inertia">
+    <link name="${robot_namespace}/base_link"></link>
+
+    <joint name="${robot_namespace}/base_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <parent link="${robot_namespace}/base_link" />
+      <child link="${robot_namespace}/base_link_inertia" />
+    </joint>
+
+    <link name="${robot_namespace}/base_link_inertia">
+      <inertial>
+        <mass value="${mass}" />  <!-- [kg] -->
+       <xacro:insert_block name="origin" />
+        <xacro:insert_block name="inertia" />
+      </inertial>
+
+      <visual>
+        <xacro:insert_block name="origin" />
+        <geometry>
+          <mesh filename="${mesh_file}" scale="1 1 1" />
+        </geometry>
+      </visual>
+
+      <collision>
+         <xacro:insert_block name="origin" />
+        <geometry>
+          <mesh filename="${mesh_file}" scale="1 1 1" />
+        </geometry>
+      </collision>
+    </link>
+
+ 
+
+    <gazebo reference="${robot_namespace}/base_link">
+     <material>Gazebo/Grey</material>
+    </gazebo>
+
+  </xacro:macro>
+
+  
+
+  <!-- servo link and joint-->
+  <xacro:macro name="servo_macro"
+    params="robot_namespace suffix mass meshfile direction p i d color *link_origin *joint_origin">
+    <link  name="${robot_namespace}/servo${suffix}">
+      <inertial>
+        <!-- <origin  xyz="0.00077269 0 0.007792"  rpy="0 0 0" /> -->
+        <xacro:insert_block name="link_origin" />
+        <mass  value="${mass}" />
+        <inertia  ixx="5.5E-05" ixy="0" ixz="-2.3E-05" iyy="0.000164" iyz="0" izz="0.000135" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="${meshfile}" />
+        </geometry>
+      </visual>
+      <collision>
+        <origin  xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh  filename="${meshfile}" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint  name="${robot_namespace}/b_servo${suffix}"  type="revolute">
+      <xacro:insert_block name="joint_origin" />
+      <parent  link="${robot_namespace}/base_link" />
+      <child   link="${robot_namespace}/servo${suffix}" />
+      <axis    xyz="1 0 0" />
+      <limit   lower="${-pi/2}" upper="${pi/2}" effort="1" velocity="10" />
+    </joint>
+   
+   <gazebo>
+      <plugin name="${robot_namespace}_servo_model_${suffix}" filename="librotors_gazebo_motor_model.so">
+        <robotNamespace>${robot_namespace}</robotNamespace>
+        <jointName>${robot_namespace}/b_servo${suffix}</jointName>
+        <linkName>${robot_namespace}/base_link</linkName>
+        <motorType>position</motorType>
+        <turningDirection>${direction}</turningDirection>
+        <commandSubTopic>gazebo/command/servo_position</commandSubTopic>
+        <motorNumber>${suffix}</motorNumber>
+        <motorPositionPubTopic>servo_position/${suffix}</motorPositionPubTopic>
+        <rotorVelocitySlowdownSim>${rotor_velocity_slowdown_sim}</rotorVelocitySlowdownSim>
+        <joint_control_pid>
+          <p>${p}</p>
+          <i>${i}</i>
+          <d>${d}</d>
+          <iMax>2</iMax>
+          <iMin>-2</iMin>
+          <cmdMax>1</cmdMax>
+          <cmdMin>-1</cmdMin>
+        </joint_control_pid>
+      </plugin>
+    </gazebo>
+  
+
+
+    <gazebo reference="${robot_namespace}/servo${suffix}">
+    <material>Gazebo/${color}</material>
+    </gazebo>
+
+  </xacro:macro>
+  
+  <!-- rotor link and joint-->
+  <xacro:macro name="rotor_macro"
+    params="robot_namespace suffix mass meshfile direction motor_constant moment_constant 
+    time_constant_up time_constant_down max_rot_velocity rotor_drag_coefficient rolling_moment_coefficient rotor_velocity_slowdown_sim
+    color *link_origin *joint_origin">
+    <link  name="${robot_namespace}/rotor${suffix}">
+      <inertial>
+        <xacro:insert_block name="link_origin" />
+        <mass  value="${mass}" />
+        <inertia  ixx="2.57E-07" ixy="0" ixz="0" iyy="4.8209E-06" iyz="0" izz="4.7992E-05" />
+      </inertial>
+
+      <visual>
+        <origin  xyz="0 0 0"  rpy="0 0 0" />
+        <geometry>
+          <mesh  filename="${meshfile}" />
+        </geometry>
+      </visual>
+
+      <collision>
+        <origin  xyz="0 0 0"  rpy="0 0 0" />
+        <geometry>
+          <mesh  filename="${meshfile}" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint  name="${robot_namespace}/servo_r${suffix}"  type="continuous">
+       <xacro:insert_block name="joint_origin" />
+      <parent  link="${robot_namespace}/servo${suffix}" />
+      <child  link="${robot_namespace}/rotor${suffix}" />
+      <axis  xyz="0 0 1" />
+    </joint>
+    
+     
+    <gazebo>
+      <plugin name="${robot_namespace}_motor_model_${suffix}" filename="librotors_gazebo_motor_model.so">
+        <robotNamespace>${robot_namespace}</robotNamespace>
+        <jointName>${robot_namespace}/servo_r${suffix}</jointName>
+        <linkName>${robot_namespace}/rotor${suffix}</linkName>
+        <motorType>velocity</motorType>
+        <turningDirection>${direction}</turningDirection>
+        <timeConstantUp>${time_constant_up}</timeConstantUp>
+        <timeConstantDown>${time_constant_down}</timeConstantDown>
+        <maxRotVelocity>${max_rot_velocity}</maxRotVelocity>
+        <motorConstant>${motor_constant}</motorConstant>
+        <momentConstant>${moment_constant}</momentConstant>
+        <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
+        <motorNumber>${suffix}</motorNumber>
+        <rotorDragCoefficient>${rotor_drag_coefficient}</rotorDragCoefficient>
+        <rollingMomentCoefficient>${rolling_moment_coefficient}</rollingMomentCoefficient>
+        <motorSpeedPubTopic>motor_speed/${suffix}</motorSpeedPubTopic>
+        <rotorVelocitySlowdownSim>${rotor_velocity_slowdown_sim}</rotorVelocitySlowdownSim>
+
+      </plugin>
+    </gazebo>
+
+    
+    <gazebo reference="${robot_namespace}/rotor${suffix}">
+      <material>Gazebo/${color}</material>
+    </gazebo>        
+ </xacro:macro>
+
+</robot>
