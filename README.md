@@ -34,7 +34,7 @@ LU Kaiwen, YANG Zhong, ZHANG Qiuyan. Active disturbance rejection flight control
    ```
    $ cd ~/catkin_ws/
    $ catkin init  # If you haven't done this before.
-   $ catkin build
+   $ catkin build / catkin_make 
    ```
 
 使用向导
