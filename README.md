@@ -51,7 +51,7 @@ LU Kaiwen, YANG Zhong, ZHANG Qiuyan. Active disturbance rejection flight control
     ```
     $ roslaunch vfly omni_pid_controller.launch mav_name:=vfly type:=x
     ```
-    > **Note**控制器会控制VFly以水平姿态悬停在3m的高度. 
+    > **Note** 控制器会控制VFly以水平姿态悬停在3m的高度. 
 
     当然，你也可以启动ADRC全向控制器 (PID和ADRC二选一)
 
@@ -75,7 +75,7 @@ LU Kaiwen, YANG Zhong, ZHANG Qiuyan. Active disturbance rejection flight control
     yaw: 0.0" 
     ```
 
-    > **Note**你可以在输入rostopic pub -1 /vfly/command/pose后，按两次Tab键自动补全后面的内容，然后修改其中的姿态和位置期望。
+    > **Note** 你可以在输入rostopic pub -1 /vfly/command/pose后，按两次Tab键自动补全后面的内容，然后修改其中的姿态和位置期望。
 
     * 定点旋转(以当前状态水平悬停在3m处为例)
     
@@ -91,7 +91,7 @@ LU Kaiwen, YANG Zhong, ZHANG Qiuyan. Active disturbance rejection flight control
     pitch: 0.0
     yaw: 0.0" 
     ```
-    > **Note**你可以同时给定姿态和位置期望，因为可倾转多旋翼有别于常规多旋翼，可以同时控制姿态和位置。
+    > **Note** 你可以同时给定姿态和位置期望，因为可倾转多旋翼有别于常规多旋翼，可以同时控制姿态和位置。
 
 4. 查看位置姿态响应曲线
 
