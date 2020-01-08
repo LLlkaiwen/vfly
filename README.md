@@ -12,5 +12,5 @@ This package provides a model  of quadrotor with tiltable rotors, example omni-d
 ```
 If you are using this simulator within the research for your publication, please cite:
 ```
-LU Kaiwen, YANG Zhong, ZHANG Qiuyan. Active disturbance rejection flight control method for thrust-vectored quadrotor with tiltable rotors. *Control Theory & Applications*
+LU Kaiwen, YANG Zhong, ZHANG Qiuyan. Active disturbance rejection flight control method for thrust-vectored quadrotor with tiltable rotors. Control Theory & Applications
 ```
