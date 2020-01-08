@@ -60,7 +60,7 @@ LU Kaiwen, YANG Zhong, ZHANG Qiuyan. Active disturbance rejection flight control
     ```
 3. 发送控制指令
 
-    * 水平飞行(以当前状态水平悬停在3m出为例)
+    * 水平飞行(以当前状态水平悬停在3m处为例)
 
     ```
     rostopic pub -1 /vfly/command/pose vfly/vfly_pose "header:
@@ -77,7 +77,7 @@ LU Kaiwen, YANG Zhong, ZHANG Qiuyan. Active disturbance rejection flight control
 
     > **Note**你可以在输入rostopic pub -1 /vfly/command/pose后，按两次Tab键自动补全后面的内容，然后修改其中的姿态和位置期望。
 
-    * 定点旋转(以当前状态水平悬停在3m出为例)
+    * 定点旋转(以当前状态水平悬停在3m处为例)
     
     ```
     rostopic pub -1 /vfly/command/pose vfly/vfly_pose "header:
@@ -94,3 +94,7 @@ LU Kaiwen, YANG Zhong, ZHANG Qiuyan. Active disturbance rejection flight control
     > **Note**你可以同时给定姿态和位置期望，因为可倾转多旋翼有别于常规多旋翼，可以同时控制姿态和位置。
 
 4. 查看位置姿态响应曲线
+
+    ```
+    $ rqt_plot /vfly/ground_truth/position/point /vfly/state/roll /vfly/state/pitch /vfly/state/yaw
+    ```
