@@ -53,7 +53,7 @@ LU Kaiwen, YANG Zhong, ZHANG Qiuyan. Active disturbance rejection flight control
     ```
     > **Note**控制器会控制VFly以水平姿态悬停在3m的高度. 
 
-当然，你也可以启动ADRC全向控制器 (PID和ADRC二选一)
+    当然，你也可以启动ADRC全向控制器 (PID和ADRC二选一)
 
     ```
     $ roslaunch vfly omni_adrc_controller.launch mav_name:=vfly type:=x
