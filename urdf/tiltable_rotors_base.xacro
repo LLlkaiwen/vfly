@@ -74,12 +74,12 @@
       </collision>
     </link>
 
-    <joint  name="${robot_namespace}/b_servo${suffix}"  type="revolute">
+    <joint  name="${robot_namespace}/b_servo${suffix}"  type="continuous">
       <xacro:insert_block name="joint_origin" />
       <parent  link="${robot_namespace}/base_link" />
       <child   link="${robot_namespace}/servo${suffix}" />
       <axis    xyz="1 0 0" />
-      <limit   lower="${-pi/2}" upper="${pi/2}" effort="1" velocity="10" />
+      <!-- <limit   lower="${-pi}" upper="${pi}" effort="1" velocity="10" /> -->
     </joint>
    
    <gazebo>
