@@ -52,3 +52,11 @@ add_dependencies(omni_pid_controller_node ${vfly}_generate_messages_cpp)
 add_executable(omni_adrc_controller_node src/omni_adrc_controller_node.cpp)
 target_link_libraries(omni_adrc_controller_node  adrc ${catkin_LIBRARIES})
 add_dependencies(omni_adrc_controller_node ${vfly}_generate_messages_cpp)
+
+add_executable(rotation_on_fixed_spot_example src/rotation_on_fixed_spot_example.cpp)
+target_link_libraries(rotation_on_fixed_spot_example ${catkin_LIBRARIES})
+add_dependencies(rotation_on_fixed_spot_example ${vfly}_generate_messages_cpp)
+
+add_executable(move_with_zero_attitude_example src/move_with_zero_attitude_example.cpp)
+target_link_libraries(move_with_zero_attitude_example ${catkin_LIBRARIES})
+add_dependencies(move_with_zero_attitude_example ${vfly}_generate_messages_cpp)
